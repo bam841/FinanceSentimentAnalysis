@@ -14,6 +14,7 @@ except Exception:
     pass
 
 def run_notebook(notebook_path: str = 'sentiment_analysis.ipynb') -> bool:
+    os.environ['NOTEBOOK_HEADLESS_EXEC'] = '1'
     with open(notebook_path, 'r', encoding='utf-8') as f:
         nb = nbf.read(f, as_version=4)
 
