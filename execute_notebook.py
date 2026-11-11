@@ -8,7 +8,12 @@ from contextlib import redirect_stdout, redirect_stderr
 import nbformat as nbf
 import matplotlib.pyplot as plt
 
-def run_notebook(notebook_path: str = 'sentiment_analysis.ipynb'):
+try:
+    from app import FinancialSentimentInferenceEngine
+except Exception:
+    pass
+
+def run_notebook(notebook_path: str = 'sentiment_analysis.ipynb') -> bool:
     with open(notebook_path, 'r', encoding='utf-8') as f:
         nb = nbf.read(f, as_version=4)
 
@@ -20,12 +25,13 @@ def run_notebook(notebook_path: str = 'sentiment_analysis.ipynb'):
     execution_count = 1
     total_code_cells = sum(1 for c in nb.cells if c.cell_type == 'code')
     print(f"Starting execution of {total_code_cells} code cells in {notebook_path}...")
+    all_succeeded = True
 
     for idx, cell in enumerate(nb.cells):
         if cell.cell_type != 'code':
             continue
 
-        print(f"\n[{execution_count}/{total_code_cells}] Executing code cell (Line ~{idx})...")
+        print(f"\n[{execution_count}/{total_code_cells}] Executing code cell (Index ~{idx})...")
         cell_source = cell.source
 
         # Buffer for stdout and stderr
@@ -44,9 +50,10 @@ def run_notebook(notebook_path: str = 'sentiment_analysis.ipynb'):
             success = True
         except Exception as e:
             success = False
+            all_succeeded = False
             err_msg = traceback.format_exc()
             stderr_buf.write(err_msg)
-            print(f"ERROR in cell {execution_count}: {e}")
+            print(f"❌ ERROR in cell {execution_count}: {e}")
 
         # Collect captured text output
         out_text = stdout_buf.getvalue()
@@ -86,14 +93,20 @@ def run_notebook(notebook_path: str = 'sentiment_analysis.ipynb'):
         execution_count += 1
 
         if not success:
-            print(f"Halting execution due to error in cell {execution_count - 1}.")
+            print(f"❌ Halting execution due to error in cell {execution_count - 1}.")
             break
 
     # Save executed notebook
     with open(notebook_path, 'w', encoding='utf-8') as f:
         nbf.write(nb, f)
 
-    print(f"\nExecution finished! Notebook saved to {notebook_path}.")
+    if all_succeeded:
+        print(f"\n✅ Execution finished successfully! All {execution_count - 1} code cells passed without error. Notebook saved to {notebook_path}.")
+    else:
+        print(f"\n❌ Execution aborted due to errors.")
+        sys.exit(1)
+
+    return all_succeeded
 
 if __name__ == '__main__':
     run_notebook()
