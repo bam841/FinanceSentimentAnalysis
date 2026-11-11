@@ -1,0 +1,19 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Virtual environments
+venv/
+env/
+.env/
+
+# Large Model Checkpoints (>100MB exceeds GitHub push limit)
+# Note: FinBERT weights can be regenerated via execute_notebook.py or fine-tuned directly from ProsusAI/finbert
+*.pt
+*.bin
+*.safetensors
+artifacts/*.pt

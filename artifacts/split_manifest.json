@@ -1,0 +1,34 @@
+{
+    "project": "Financial Sentiment Analysis",
+    "random_seed": 42,
+    "strategy": "Two-Stage Stratified Split (70/15/15)",
+    "partitions": {
+        "train": {
+            "path": "artifacts/train.parquet",
+            "sample_count": 3725,
+            "class_distribution": {
+                "neutral": 2015,
+                "positive": 1296,
+                "negative": 414
+            }
+        },
+        "validation": {
+            "path": "artifacts/val.parquet",
+            "sample_count": 798,
+            "class_distribution": {
+                "neutral": 431,
+                "positive": 278,
+                "negative": 89
+            }
+        },
+        "test": {
+            "path": "artifacts/test.parquet",
+            "sample_count": 799,
+            "class_distribution": {
+                "neutral": 432,
+                "positive": 278,
+                "negative": 89
+            }
+        }
+    }
+}
