@@ -352,13 +352,22 @@ val_df = val_df.reset_index(drop=True)
 test_df = test_df.reset_index(drop=True)
 
 # Strict Contamination & Set-Hash Verification (Rubric A5)
-train_hashes = set(train_df['Sentence'])
-val_hashes = set(val_df['Sentence'])
-test_hashes = set(test_df['Sentence'])
+train_set = set(train_df['Sentence'])
+val_set = set(val_df['Sentence'])
+test_set = set(test_df['Sentence'])
 
-assert len(train_hashes.intersection(val_hashes)) == 0, "FATAL: Train-Val Data Contamination Detected!"
-assert len(train_hashes.intersection(test_hashes)) == 0, "FATAL: Train-Test Data Contamination Detected!"
-assert len(val_hashes.intersection(test_hashes)) == 0, "FATAL: Val-Test Data Contamination Detected!"
+train_val_overlap = train_set.intersection(val_set)
+train_test_overlap = train_set.intersection(test_set)
+val_test_overlap = val_set.intersection(test_set)
+
+print("--- Data Contamination Pre-Flight Audit ---")
+print(f"Train & Val Overlap:  {len(train_val_overlap)} rows (Expected: 0)")
+print(f"Train & Test Overlap: {len(train_test_overlap)} rows (Expected: 0)")
+print(f"Val & Test Overlap:   {len(val_test_overlap)} rows (Expected: 0)")
+assert len(train_val_overlap) == 0, f"FATAL: Train & Val Overlap detected: {len(train_val_overlap)}"
+assert len(train_test_overlap) == 0, f"FATAL: Train & Test Overlap detected: {len(train_test_overlap)}"
+assert len(val_test_overlap) == 0, f"FATAL: Val & Test Overlap detected: {len(val_test_overlap)}"
+print("Status: PASSED. Zero cross-split contamination verified.\\n")
 
 # Persist partitions to artifacts
 train_df.to_parquet('artifacts/train.parquet', index=False)
