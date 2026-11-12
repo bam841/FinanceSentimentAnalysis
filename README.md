@@ -6,6 +6,10 @@
 [![Transformers](https://img.shields.io/badge/🤗_Transformers-5.20-yellow.svg)](https://huggingface.co/)
 [![GUI: Tkinter](https://img.shields.io/badge/GUI-Tkinter-brightgreen.svg)](https://docs.python.org/3/library/tkinter.html)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+[![Study Guide](https://img.shields.io/badge/Mobile_Study_Guide-CODE__EXPLANATION.md-purple.svg)](CODE_EXPLANATION.md)
+
+> 📱 **Studying the code on your phone?**  
+> Read the complete cell-by-cell and line-by-line explanation guide in **[CODE_EXPLANATION.md](CODE_EXPLANATION.md)**.
 
 An end-to-end NLP classification pipeline for financial sentiment analysis, comparing classical machine learning baselines with fine-tuned domain-specific Transformers (FinBERT). Engineered to satisfy all **23 rubric criteria** across Data Preparation, Model Development, Evaluation & Optimization, and Deployment (80/80 Marks).
 
