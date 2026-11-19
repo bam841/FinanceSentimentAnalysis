@@ -1,16 +1,18 @@
 {
-    "model_name": "Enterprise Financial Sentiment Analyzer",
-    "version": "1.0.0",
-    "rubric_compliance": "80/80 Marks Compliant",
-    "intended_use": "Automated sentiment analysis for corporate financial earnings disclosures and market commentary.",
-    "architectures": {
-        "champion": "FinBERT (ProsusAI/finbert)",
-        "baseline_edge": "Balanced L2-Regularized Logistic Regression"
-    },
-    "performance": {
-        "finbert_macro_f1": 0.7689,
-        "finbert_test_accuracy": 0.8098,
-        "baseline_macro_f1": 0.7652
-    },
-    "author": "Antigravity ML Engineering Suite"
+  "project_name": "Financial Sentiment Analysis Enterprise Pipeline",
+  "target_metric": "Accuracy >= 90%, Macro F1 >= 0.85",
+  "best_ensemble_test_accuracy": 0.9061326658322904,
+  "best_ensemble_test_macro_f1": 0.898600867306438,
+  "supported_architectures": [
+    "Rule-Based VADER",
+    "Logistic Regression (TF-IDF)",
+    "FinBERT",
+    "DeBERTa-v3",
+    "Bayesian Ensemble"
+  ],
+  "interfaces": [
+    "Tkinter Desktop GUI (app.py)",
+    "CLI (cli_predict.py)",
+    "REST / Notebook Engine"
+  ]
 }

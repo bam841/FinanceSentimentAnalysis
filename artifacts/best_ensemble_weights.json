@@ -1,0 +1,8 @@
+{
+  "finbert_weight_alpha": 0.4018090982454976,
+  "deberta_weight": 0.5981909017545024,
+  "validation_macro_f1": 0.9150696191834613,
+  "test_accuracy": 0.9061326658322904,
+  "test_macro_f1": 0.898600867306438,
+  "test_weighted_f1": 0.9067179990891968
+}
